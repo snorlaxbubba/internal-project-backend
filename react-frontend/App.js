@@ -2,27 +2,36 @@ import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const getRandomImage = () => {
+  // Generate a random number between 1 and 1000 to use as the image ID
   const randomNumber = Math.floor(Math.random() * 1000) + 1;
+  // Return the image URL
   return `https://picsum.photos/200/200?random=${randomNumber}`;
 };
 
 export default function App() {
   return (
+    // Container
     <View style={styles.container}>
+      {/* Top Bar */}
       <View style={styles.topBar}>
+        {/* Search Icon */}
         <TouchableOpacity style={styles.searchIcon}>
           <Image
             source={{ uri: 'https://picsum.photos/20/20?random=1' }}
             style={{ width: 20, height: 20 }}
           />
         </TouchableOpacity>
+        {/* Title */}
         <Text style={styles.title}>PEOPLE</Text>
+        {/* Profile Image */}
         <Image
           source={{ uri: 'https://picsum.photos/40/40?random=2' }}
           style={styles.profileImage}
         />
       </View>
+      {/* Sort Bar */}
       <View style={styles.sortBar}>
+        {/* Sort Option */}
         <TouchableOpacity style={styles.sortOption}>
           <Image source={{ uri: getRandomImage() }} style={styles.icon} />
           <Text style={styles.sortLabel}>Text</Text>
@@ -47,9 +56,10 @@ export default function App() {
           <Image source={{ uri: getRandomImage() }} style={styles.icon} />
           <Text style={styles.sortLabel}>Text</Text>
         </TouchableOpacity>
-        
       </View>
+      {/* Card List */}
       <View style={styles.cardList}>
+        {/* Card */}
         <TouchableOpacity style={styles.card}>
           <Image source={{ uri: getRandomImage() }} style={styles.profilePic} />
           <View style={styles.details}>
@@ -122,9 +132,9 @@ export default function App() {
         </TouchableOpacity>
       </View>
       <View style={styles.addButtonContainer}>
-  
+  {/* Footer */}
   <View style={styles.iconsContainer}>
-  
+
     <TouchableOpacity style={styles.iconButton}>
       <Image source={{ uri: getRandomImage() }} style={styles.icon} />
       <Text style={styles.iconLabel}>Happiness</Text>
