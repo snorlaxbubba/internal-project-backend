@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Spatie\FlareClient\Flare;
+use App\Http\Controllers\FlavriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//comment
+Route::get('api/flavrite', [FlavriteController::class, 'getFlavriteMatchJSON']);
