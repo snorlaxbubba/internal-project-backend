@@ -65,30 +65,77 @@ export default function App() {
             <Text style={styles.percentageText}>90%</Text>
           </View>
         </TouchableOpacity>
+        <TouchableOpacity style={styles.card}>
+          <Image source={{ uri: getRandomImage() }} style={styles.profilePic} />
+          <View style={styles.details}>
+            <Text style={styles.name}>Jack Chan</Text>
+            <View style={styles.stats}>
+              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
+              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
+              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
+            </View>
+          </View>
+          <View style={styles.percentage}>
+            <Text style={styles.percentageText}>30%</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.card}>
+          <Image source={{ uri: getRandomImage() }} style={styles.profilePic} />
+          <View style={styles.details}>
+            <Text style={styles.name}>Mason Porter</Text>
+            <View style={styles.stats}>
+              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
+              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
+              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
+            </View>
+          </View>
+          <View style={styles.percentage}>
+            <Text style={styles.percentageText}>50%</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.card}>
+          <Image source={{ uri: getRandomImage() }} style={styles.profilePic} />
+          <View style={styles.details}>
+            <Text style={styles.name}>Carl Greenburg</Text>
+            <View style={styles.stats}>
+              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
+              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
+              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
+            </View>
+          </View>
+          <View style={styles.percentage}>
+            <Text style={styles.percentageText}>70%</Text>
+          </View>
+        </TouchableOpacity>
       </View>
       <View style={styles.addButtonContainer}>
-        <TouchableOpacity style={styles.addButton}>
-          <Image
-            source={{ uri: 'https://picsum.photos/20/20?random=3' }}
-            style={{ width: 20, height: 20 }}
-          />
-        </TouchableOpacity>
-        <Text style={styles.addButtonText}>Add flavor</Text>
-        <View style={styles.iconsContainer}>
-          <TouchableOpacity>
-            <Image source={{ uri: getRandomImage() }} style={styles.icon} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image source={{ uri: getRandomImage() }} style={styles.icon} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image source={{ uri: getRandomImage() }} style={styles.icon} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image source={{ uri: getRandomImage() }} style={styles.icon} />
-          </TouchableOpacity>
-        </View>
-      </View>
+  
+  <View style={styles.iconsContainer}>
+  
+    <TouchableOpacity style={styles.iconButton}>
+      <Image source={{ uri: getRandomImage() }} style={styles.icon} />
+      <Text style={styles.iconLabel}>Happiness</Text>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.iconButton}>
+      <Image source={{ uri: getRandomImage() }} style={styles.icon} />
+      <Text style={styles.iconLabel}>People</Text>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.addButton}>
+    <Image source={{ uri: getRandomImage() }} style={styles.addIcon} />
+    <Image source={{ uri: "https://static.vecteezy.com/system/resources/previews/009/344/473/original/plus-sign-transparent-free-png.png" }} style={styles.plusIcon} />
+    
+  </TouchableOpacity>
+    <TouchableOpacity style={styles.iconButton}>
+      <Image source={{ uri: getRandomImage() }} style={styles.icon} />
+      <Text style={styles.iconLabel}>Places</Text>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.iconButton}>
+      <Image source={{ uri: getRandomImage() }} style={styles.icon} />
+      <Text style={styles.iconLabel}>Wishlist</Text>
+    </TouchableOpacity>
+  </View>
+</View>
+
     </View>
   );
 }
@@ -209,10 +256,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#4CAF50',
   },
+  plusIcon: {
+    width: 12,
+    height: 12,
+  },
   iconsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginHorizontal: 50,
+    alignItems: 'center',
+  },
+  iconButton: {
+    alignItems: 'center',
+    marginHorizontal: 10,
   },
   icon: {
     width: 30,
@@ -220,4 +274,5 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 15,
   },
+  
 });
