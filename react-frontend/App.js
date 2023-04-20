@@ -25,16 +25,29 @@ export default function App() {
       <View style={styles.sortBar}>
         <TouchableOpacity style={styles.sortOption}>
           <Image source={{ uri: getRandomImage() }} style={styles.icon} />
+          <Text style={styles.sortLabel}>Text</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.sortOption}>
           <Image source={{ uri: getRandomImage() }} style={styles.icon} />
+          <Text style={styles.sortLabel}>Text</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.sortOption}>
           <Image source={{ uri: getRandomImage() }} style={styles.icon} />
+          <Text style={styles.sortLabel}>Text</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.sortOption}>
           <Image source={{ uri: getRandomImage() }} style={styles.icon} />
+          <Text style={styles.sortLabel}>Text</Text>
         </TouchableOpacity>
+        <TouchableOpacity style={styles.sortOption}>
+          <Image source={{ uri: getRandomImage() }} style={styles.icon} />
+          <Text style={styles.sortLabel}>Text</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.sortOption}>
+          <Image source={{ uri: getRandomImage() }} style={styles.icon} />
+          <Text style={styles.sortLabel}>Text</Text>
+        </TouchableOpacity>
+        
       </View>
       <View style={styles.cardList}>
         <TouchableOpacity style={styles.card}>
@@ -182,6 +195,15 @@ const styles = StyleSheet.create({
     height: 30,
     borderRadius: 15,
   },
+  sortLabel: {
+    fontSize: 9,
+    fontWeight: 'bold',
+    color: '#FFA54C',
+    paddingBottom: 30,
+    paddingLeft: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   cardList: {
     paddingHorizontal: 20,
     paddingBottom: 20,
@@ -194,6 +216,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: '#f2f2f2',
     borderRadius: 10,
+    marginTop: 20,
   },
   profilePic: {
     width: 50,
