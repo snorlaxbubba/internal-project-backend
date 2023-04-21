@@ -1,5 +1,7 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import axios from 'axios';
 
 const getRandomImage = () => {
   // Generate a random number between 1 and 1000 to use as the image ID
@@ -9,6 +11,29 @@ const getRandomImage = () => {
 };
 
 export default function App() {
+
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchUsers = () => {
+      try {
+        fetch('http://127.0.0.1/api/flavrite')
+          .then(response => response.json())
+          .then(data => {
+            const sortedUsers = data.sort((a, b) => b.favorite_match_score - a.favorite_match_score);
+            const topFiveUsers = sortedUsers.slice(0, 5);
+            setUsers(topFiveUsers);
+            console.log(topFiveUsers);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
+    fetchUsers();
+  }, []);
+  
+  
   return (
     // Container
     <View style={styles.container}>
@@ -17,7 +42,7 @@ export default function App() {
         {/* Search Icon */}
         <TouchableOpacity style={styles.searchIcon}>
           <Image
-            source={{ uri: 'https://picsum.photos/20/20?random=1' }}
+            source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/1200px-Magnifying_glass_icon.svg.png' }}
             style={{ width: 20, height: 20 }}
           />
         </TouchableOpacity>
@@ -57,79 +82,26 @@ export default function App() {
           <Text style={styles.sortLabel}>Text</Text>
         </TouchableOpacity>
       </View>
-      {/* Card List */}
-      <View style={styles.cardList}>
-        {/* Card */}
-        <TouchableOpacity style={styles.card}>
-          <Image source={{ uri: getRandomImage() }} style={styles.profilePic} />
-          <View style={styles.details}>
-            <Text style={styles.name}>John Doe</Text>
-            <View style={styles.stats}>
-              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
-              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
-              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
-            </View>
-          </View>
-          <View style={styles.percentage}>
-            <Text style={styles.percentageText}>75%</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.card}>
-          <Image source={{ uri: getRandomImage() }} style={styles.profilePic} />
-          <View style={styles.details}>
-            <Text style={styles.name}>Jane Smith</Text>
-            <View style={styles.stats}>
-              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
-              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
-              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
-            </View>
-          </View>
-          <View style={styles.percentage}>
-            <Text style={styles.percentageText}>90%</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.card}>
-          <Image source={{ uri: getRandomImage() }} style={styles.profilePic} />
-          <View style={styles.details}>
-            <Text style={styles.name}>Jack Chan</Text>
-            <View style={styles.stats}>
-              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
-              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
-              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
-            </View>
-          </View>
-          <View style={styles.percentage}>
-            <Text style={styles.percentageText}>30%</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.card}>
-          <Image source={{ uri: getRandomImage() }} style={styles.profilePic} />
-          <View style={styles.details}>
-            <Text style={styles.name}>Mason Porter</Text>
-            <View style={styles.stats}>
-              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
-              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
-              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
-            </View>
-          </View>
-          <View style={styles.percentage}>
-            <Text style={styles.percentageText}>50%</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.card}>
-          <Image source={{ uri: getRandomImage() }} style={styles.profilePic} />
-          <View style={styles.details}>
-            <Text style={styles.name}>Carl Greenburg</Text>
-            <View style={styles.stats}>
-              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
-              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
-              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
-            </View>
-          </View>
-          <View style={styles.percentage}>
-            <Text style={styles.percentageText}>70%</Text>
-          </View>
-        </TouchableOpacity>
+      <View style={styles.container}>
+        <View style={styles.cardList}>
+          {users.map((user) => (
+            <TouchableOpacity style={styles.card} key={user.id}>
+              <Image source={{ uri: getRandomImage() }} style={styles.profilePic} />
+              <View style={styles.details}>
+                <Text style={styles.name}>{user.name}</Text>
+                <Text style={styles.email}>{user.email}</Text>
+                <View style={styles.stats}>
+                  <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
+                  <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
+                  <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
+                </View>
+              </View>
+              <View style={styles.percentage}>
+                <Text style={styles.percentageText}>{user.favorite_match_score}%</Text>
+              </View>
+            </TouchableOpacity>
+          ))}
+        </View>
       </View>
       <View style={styles.addButtonContainer}>
   {/* Footer */}
@@ -179,8 +151,8 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 15,
-    borderWidth: 1,
-    borderColor: '#000',
+    
+    
   },
   title: {
     fontSize: 20,
@@ -254,9 +226,9 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   percentage: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 60,
+    height: 60,
+    borderRadius: 40,
     backgroundColor: '#FB7C1E',
     alignItems: 'center',
     justifyContent: 'center',
