@@ -138,7 +138,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F6E9CE',
+    backgroundColor: '#FFF7EF',
   },
   usersContainer: {
     height: 590, // set a fixed height
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#FFA54C',
+    color: '#EC6448',
     marginBottom: 30,
   },
   profileImage: {
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
   sortLabel: {
     fontSize: 9,
     fontWeight: 'bold',
-    color: '#FFA54C',
+    color: '#000',
     paddingBottom: 30,
     paddingLeft: 4,
     alignItems: 'center',
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    backgroundColor: '#f2f2f2',
+    backgroundColor: '#fff',
     borderRadius: 10,
     marginTop: 20,
   },
@@ -237,20 +237,24 @@ const styles = StyleSheet.create({
   },
   statIcon: {
     width: 20,
-    height: 20,
+    height: 25,
     marginRight: 5,
+    borderRadius: 20, // set to half the width/height for a circular shape
+    borderWidth: 1,
+    borderColor: '#000',
   },
+  
   percentage: {
     width: 60,
     height: 60,
     borderRadius: 40,
-    backgroundColor: '#FB7C1E',
+    backgroundColor: '#FFF7EF',
     alignItems: 'center',
     justifyContent: 'center',
   },
   percentageText: {
-    color: '#FBA61E',
-    fontSize: 16,
+    color: '#EC6448',
+    fontSize: 12,
     fontWeight: 'bold',
   },
   addButtonContainer: {
@@ -265,7 +269,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: '#FB7C1E',
+    backgroundColor: '#EC6448',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 5,
