@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-native';
 import axios from 'axios';
 
 const getRandomImage = () => {
@@ -11,20 +11,19 @@ const getRandomImage = () => {
 };
 
 export default function App() {
-
+  const options = ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5', 'Option 6'];
   const [users, setUsers] = useState([]);
-
+  const SortOptions = () => {
+    const [selectedOption, setSelectedOption] = useState(null);
+  };
   useEffect(() => {
-    const fetchUsers = () => {
+    const fetchUsers = async () => {
       try {
-        fetch('http://127.0.0.1/api/flavrite')
-          .then(response => response.json())
-          .then(data => {
-            const sortedUsers = data.sort((a, b) => b.favorite_match_score - a.favorite_match_score);
-            const topFiveUsers = sortedUsers.slice(0, 5);
-            setUsers(topFiveUsers);
-            console.log(topFiveUsers);
-          });
+        const response = await axios.get('http://127.0.0.1/api/flavrite');
+        const sortedUsers = response.data.sort((a, b) => b.favorite_match_score - a.favorite_match_score);
+        const topFiveUsers = sortedUsers.slice(0, 10);
+        setUsers(topFiveUsers);
+        console.log(topFiveUsers);
       } catch (error) {
         console.log(error);
       }
@@ -83,27 +82,28 @@ export default function App() {
         </TouchableOpacity>
       </View>
       <View style={styles.container}>
-        <View style={styles.cardList}>
-          {users.map((user) => (
-            <TouchableOpacity style={styles.card} key={user.id}>
-              <Image source={{ uri: getRandomImage() }} style={styles.profilePic} />
-              <View style={styles.details}>
-                <Text style={styles.name}>{user.name}</Text>
-                <Text style={styles.email}>{user.email}</Text>
-                <View style={styles.stats}>
-                  <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
-                  <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
-                  <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
-                </View>
-              </View>
-              <View style={styles.percentage}>
-                <Text style={styles.percentageText}>{user.favorite_match_score}%</Text>
-              </View>
-            </TouchableOpacity>
-          ))}
-        </View>
-      </View>
-      <View style={styles.addButtonContainer}>
+  <View style={styles.usersContainer}>
+    <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollContainer}>
+      {users.map((user) => (
+        <TouchableOpacity style={styles.card} key={user.id}>
+          <Image source={{ uri: getRandomImage() }} style={styles.profilePic} />
+          <View style={styles.details}>
+            <Text style={styles.name}>{user.name}</Text>
+
+            <View style={styles.stats}>
+              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
+              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
+              <Image source={{ uri: getRandomImage() }} style={styles.statIcon} />
+            </View>
+          </View>
+          <View style={styles.percentage}>
+            <Text style={styles.percentageText}>{user.favorite_match_score}%</Text>
+          </View>
+        </TouchableOpacity>
+      ))}
+    </ScrollView>
+  </View>
+  <View style={styles.addButtonContainer}>
   {/* Footer */}
   <View style={styles.iconsContainer}>
 
@@ -116,7 +116,7 @@ export default function App() {
       <Text style={styles.iconLabel}>People</Text>
     </TouchableOpacity>
     <TouchableOpacity style={styles.addButton}>
-    <Image source={{ uri: getRandomImage() }} style={styles.addIcon} />
+    
     <Image source={{ uri: "https://static.vecteezy.com/system/resources/previews/009/344/473/original/plus-sign-transparent-free-png.png" }} style={styles.plusIcon} />
     
   </TouchableOpacity>
@@ -130,8 +130,8 @@ export default function App() {
     </TouchableOpacity>
   </View>
 </View>
-
-    </View>
+</View>
+</View>
   );
 }
 
@@ -140,19 +140,32 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F6E9CE',
   },
+  usersContainer: {
+    height: 590, // set a fixed height
+    paddingHorizontal: 20, // add horizontal padding
+    marginTop: 20,
+    borderRadius: 10,
+    shadowColor: '#000',
+    
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    overflow: 'hidden' // hide anything that goes beyond the set height
+  },
+  scrollContainer: {
+    flexGrow: 1 // allow the scroll view to grow as needed
+  },
   topBar: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     marginHorizontal: 20,
-    marginTop: 50,
+    marginTop: 10,
   },
   searchIcon: {
     width: 30,
     height: 30,
     borderRadius: 15,
-    
-    
   },
   title: {
     fontSize: 20,
@@ -171,6 +184,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginHorizontal: 20,
     marginVertical: 10,
+    marginBottom: 20,
   },
   sortOption: {
     width: 30,
@@ -185,6 +199,7 @@ const styles = StyleSheet.create({
     paddingLeft: 4,
     alignItems: 'center',
     justifyContent: 'center',
+    
   },
   cardList: {
     paddingHorizontal: 20,
@@ -243,9 +258,8 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: '#fff',
-    paddingVertical: 20,
     alignItems: 'center',
+   
   },
   addButton: {
     width: 50,
@@ -254,30 +268,44 @@ const styles = StyleSheet.create({
     backgroundColor: '#FB7C1E',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 10,
+    marginBottom: 5,
   },
-  addButtonText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#4CAF50',
+  addIcon: {
+    width: 50,
+    height: 50,
+    
   },
   plusIcon: {
-    width: 12,
-    height: 12,
+    width: 24,
+    height: 24,
   },
   iconsContainer: {
     flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
+    height: 70,
+    backgroundColor: '#FFFFFF',
+    width: '100%',
+    borderTopWidth: 1,
+    borderTopColor: '#E5E5E5'
   },
   iconButton: {
-    alignItems: 'center',
-    marginHorizontal: 10,
+    flex: 1,
+    alignItems: 'center'
   },
+
   icon: {
     width: 30,
     height: 30,
-    marginBottom: 10,
+    marginBottom: 5,
     borderRadius: 15,
   },
+  iconLabel: {
+    marginTop: 5,
+    fontSize: 12,
+    color: '#666',
+    textAlign: 'center',
+  },
+  
   
 });
