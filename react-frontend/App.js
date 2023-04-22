@@ -8,6 +8,7 @@ import hot_sauce from './assets/images/hot_sauce.png';
 import nespresso from './assets/images/nespresso.png';
 import teapot from './assets/images/teapot.png';
 import vinegar from './assets/images/vinegar.png';
+import plus_icon from './assets/images/plus_icon.png';
 
 const getRandomImage = () => {
   // Generate a random number between 1 and 1000 to use as the image ID
@@ -61,32 +62,45 @@ export default function App() {
       </View>
       {/* Sort Bar */}
       <View style={styles.sortBar}>
-        {/* Sort Option */}
-        <TouchableOpacity style={styles.sortOption}>
-          <Image source={coffee_beans} style={styles.sortOptionImage} />
-          <Text style={styles.sortLabel}>Coffee</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.sortOption}>
-          <Image source={nespresso} style={styles.sortOptionImage} />
-          <Text style={styles.sortLabel}>Nespresso</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.sortOption}>
-          <Image source={chocolate} style={styles.sortOptionImage} />
-          <Text style={styles.sortLabel}>Chocolate</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.sortOption}>
-          <Image source={teapot} style={styles.sortOptionImage} />
-          <Text style={styles.sortLabel}>Tea</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.sortOption}>
-          <Image source={hot_sauce} style={styles.sortOptionImage} />
-          <Text style={styles.sortLabel}>Hot Sauce</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.sortOption}>
-          <Image source={vinegar} style={styles.sortOptionImage} />
-          <Text style={styles.sortLabel}>Vinegars</Text>
-        </TouchableOpacity>
-      </View>
+  {/* Sort Option */}
+  <TouchableOpacity style={styles.sortOption}>
+    <View style={styles.iconWrapper}>
+      <Image source={coffee_beans} style={styles.icon} />
+    </View>
+    <Text style={styles.sortLabel}>Coffee</Text>
+  </TouchableOpacity>
+  <TouchableOpacity style={styles.sortOption}>
+    <View style={styles.iconWrapper}>
+      <Image source={nespresso} style={styles.icon} />
+    </View>
+    <Text style={styles.sortLabel}>Nespresso</Text>
+  </TouchableOpacity>
+  <TouchableOpacity style={styles.sortOption}>
+    <View style={styles.iconWrapper}>
+      <Image source={chocolate} style={styles.icon} />
+    </View>
+    <Text style={styles.sortLabel}>Chocolate</Text>
+  </TouchableOpacity>
+  <TouchableOpacity style={styles.sortOption}>
+    <View style={styles.iconWrapper}>
+      <Image source={teapot} style={styles.icon} />
+    </View>
+    <Text style={styles.sortLabel}>Tea</Text>
+  </TouchableOpacity>
+  <TouchableOpacity style={styles.sortOption}>
+    <View style={styles.iconWrapper}>
+      <Image source={hot_sauce} style={styles.icon} />
+    </View>
+    <Text style={styles.sortLabel}>Hot</Text>
+  </TouchableOpacity>
+  <TouchableOpacity style={styles.sortOption}>
+    <View style={styles.iconWrapper}>
+      <Image source={vinegar} style={styles.icon} />
+    </View>
+    <Text style={styles.sortLabel}>Vinegars</Text>
+  </TouchableOpacity>
+</View>
+
       <View style={styles.container}>
   <View style={styles.usersContainer}>
     <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollContainer}>
@@ -123,7 +137,8 @@ export default function App() {
     </TouchableOpacity>
     <TouchableOpacity style={styles.addButton}>
     
-    <Image source={{ uri: "https://static.vecteezy.com/system/resources/previews/009/344/473/original/plus-sign-transparent-free-png.png" }} style={styles.plusIcon} />
+    <Image source={plus_icon} style={styles.plusIcon} />
+    <Text style={styles.plus_text}>Add Flava</Text>
     
   </TouchableOpacity>
     <TouchableOpacity style={styles.iconButton}>
@@ -144,7 +159,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF7EF',
+    backgroundColor: '#F4EEEA',
   },
   usersContainer: {
     height: 590, // set a fixed height
@@ -177,7 +192,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#EC6448',
+    color: '#DD6467',
     marginBottom: 30,
   },
   profileImage: {
@@ -188,42 +203,41 @@ const styles = StyleSheet.create({
   sortBar: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    
+    justifyContent: 'flex-start',
+    marginHorizontal: 10,
     marginVertical: 10,
     marginBottom: 20,
+
   },
   sortOption: {
     width: 40,
     height: 40,
-    borderRadius: 15,
-    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
     marginHorizontal: 10,
+    backgroundColor: '#fff',
+    borderRadius: 20,
+  },
+  iconWrapper: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  sortOptionImage: {
-    width: 18,
-    height: 18,
-    justifyContent: 'center',
-    alignItems: 'center',
+  icon: {
+    width: 20,
+    height: 20,
+    resizeMode: 'contain',
+    borderRadius: 10,
   },
   sortLabel: {
     fontSize: 9,
     fontWeight: 'bold',
     color: '#000',
-    marginTop: 5,
     textAlign: 'center',
+    marginTop: 5,
   },
-  iconWrapper: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
   cardList: {
     paddingHorizontal: 20,
     paddingBottom: 20,
@@ -247,6 +261,7 @@ const styles = StyleSheet.create({
   details: {
     flex: 1,
     flexDirection: 'column',
+    color: '#1A282F',
   },
   name: {
     fontSize: 16,
@@ -271,12 +286,12 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 40,
-    backgroundColor: '#FFF7EF',
+    backgroundColor: '#F9DFDB',
     alignItems: 'center',
     justifyContent: 'center',
   },
   percentageText: {
-    color: '#EC6448',
+    color: '#E66E50',
     fontSize: 12,
     fontWeight: 'bold',
   },
@@ -289,10 +304,7 @@ const styles = StyleSheet.create({
    
   },
   addButton: {
-    width: 50,
-    height: 50,
     borderRadius: 25,
-    backgroundColor: '#EC6448',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 5,
@@ -303,8 +315,15 @@ const styles = StyleSheet.create({
     
   },
   plusIcon: {
-    width: 24,
-    height: 24,
+    width: 45,
+    height: 45,
+    backgroundColor: '#fff',
+    borderRadius: 25,
+    marginBottom: 5,
+  },
+  plus_text: {
+    marginBottom: 20,
+    fontSize: 12,
   },
   iconsContainer: {
     flexDirection: 'row',
@@ -321,12 +340,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
 
-  icon: {
-    width: 30,
-    height: 30,
-    marginBottom: 5,
-    borderRadius: 15,
-  },
+
   iconLabel: {
     marginTop: 5,
     fontSize: 12,
