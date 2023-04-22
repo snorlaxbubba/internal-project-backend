@@ -2,6 +2,12 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-native';
 import axios from 'axios';
+import chocolate from './assets/images/chocolate.png';
+import coffee_beans from './assets/images/coffee_beans.png';
+import hot_sauce from './assets/images/hot_sauce.png';
+import nespresso from './assets/images/nespresso.png';
+import teapot from './assets/images/teapot.png';
+import vinegar from './assets/images/vinegar.png';
 
 const getRandomImage = () => {
   // Generate a random number between 1 and 1000 to use as the image ID
@@ -57,28 +63,28 @@ export default function App() {
       <View style={styles.sortBar}>
         {/* Sort Option */}
         <TouchableOpacity style={styles.sortOption}>
-          <Image source={{ uri: getRandomImage() }} style={styles.icon} />
-          <Text style={styles.sortLabel}>Text</Text>
+          <Image source={coffee_beans} style={styles.sortOptionImage} />
+          <Text style={styles.sortLabel}>Coffee</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.sortOption}>
-          <Image source={{ uri: getRandomImage() }} style={styles.icon} />
-          <Text style={styles.sortLabel}>Text</Text>
+          <Image source={nespresso} style={styles.sortOptionImage} />
+          <Text style={styles.sortLabel}>Nespresso</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.sortOption}>
-          <Image source={{ uri: getRandomImage() }} style={styles.icon} />
-          <Text style={styles.sortLabel}>Text</Text>
+          <Image source={chocolate} style={styles.sortOptionImage} />
+          <Text style={styles.sortLabel}>Chocolate</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.sortOption}>
-          <Image source={{ uri: getRandomImage() }} style={styles.icon} />
-          <Text style={styles.sortLabel}>Text</Text>
+          <Image source={teapot} style={styles.sortOptionImage} />
+          <Text style={styles.sortLabel}>Tea</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.sortOption}>
-          <Image source={{ uri: getRandomImage() }} style={styles.icon} />
-          <Text style={styles.sortLabel}>Text</Text>
+          <Image source={hot_sauce} style={styles.sortOptionImage} />
+          <Text style={styles.sortLabel}>Hot Sauce</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.sortOption}>
-          <Image source={{ uri: getRandomImage() }} style={styles.icon} />
-          <Text style={styles.sortLabel}>Text</Text>
+          <Image source={vinegar} style={styles.sortOptionImage} />
+          <Text style={styles.sortLabel}>Vinegars</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.container}>
@@ -166,6 +172,7 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 15,
+    backgroundColor: 'transparent',
   },
   title: {
     fontSize: 20,
@@ -181,26 +188,42 @@ const styles = StyleSheet.create({
   sortBar: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    marginHorizontal: 20,
+    justifyContent: 'center',
+    
     marginVertical: 10,
     marginBottom: 20,
   },
   sortOption: {
-    width: 30,
-    height: 30,
+    width: 40,
+    height: 40,
     borderRadius: 15,
+    backgroundColor: '#fff',
+    marginHorizontal: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  sortOptionImage: {
+    width: 18,
+    height: 18,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   sortLabel: {
     fontSize: 9,
     fontWeight: 'bold',
     color: '#000',
-    paddingBottom: 30,
-    paddingLeft: 4,
+    marginTop: 5,
+    textAlign: 'center',
+  },
+  iconWrapper: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    
   },
+
   cardList: {
     paddingHorizontal: 20,
     paddingBottom: 20,
